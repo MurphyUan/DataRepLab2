@@ -1,25 +1,52 @@
+// Import Local Dependencies
 import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import Header from './components/header';
+import Content from './components/content';
+import Footer from './components/footer';
+import { Navbar, Nav } from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      // Allow Local Routing
+      <Router>
+        <div className="App">
+          {/* Create Nav Bar */}
+          <Navbar bg="primary" variant="dark">
+            <Nav className="me-auto">
+              {/* Create Links on the Navigation Bar to Components */}
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/header">Header</Nav.Link>
+              <Nav.Link href="/footer">Footer</Nav.Link>
+            </Nav>
+          </Navbar>
+          {/* Switch Statement for Navigation */}
+          <Switch>
+            {/* Route to Footer Component */}
+            <Route path="/footer">
+              <Header />
+            </Route>
+            {/* Route to Header Component */}
+            <Route path="/header">
+              <Footer />
+            </Route>
+            {/* Route to Content Component */}
+            <Route path="/">
+              <Content />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
